@@ -1,0 +1,8 @@
+{
+    "clangd.path": "/sbin/clangd",
+    "clangd.fallbackFlags": [
+        "-I",
+        "${workspaceFolder}/includes",
+        
+    ]
+}

@@ -10,9 +10,4 @@
 #define dbg(str) std::cout << (str) << std::endl
 #endif // DEBUG
 
-/**
- * Holds the LowScript keywords, that cannot should used as a identifier
- * like: variable names, function names, etc
- */
-
 #endif // UTILS_H

@@ -4,9 +4,9 @@ SRC_DIR   = ./src
 OBJ_DIR   = ./out
 BUILD_DIR = ./build
 
-INCL_FLAGS   = -I$(SRC_DIR)/includes
-CXX_FLAGS    = --std=c++20
-DEBUG_PRE	 = -DDEBUG
+INCL_FLAGS = -I$(SRC_DIR)/includes
+CXX_FLAGS  = --std=c++20
+DEBUG_PRE  = -DDEBUG
 
 INSTALL_PATH = /usr/local
 

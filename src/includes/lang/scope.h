@@ -1,30 +1,47 @@
 #ifndef SCOPE_H
 #define SCOPE_H
 
-#include <set>
+#include <exception>
+#include <map>
 #include <string>
 
-#include "lang/expressions.h"
+#include "commons.h"
 
 namespace lowscript {
-namespace internal {
-template<typename T>
-concept Nameable = T::name;
+namespace lang {
 
-template<Nameable T>
-class Scope {
+class ReferenceException : public std::exception {
 private:
-    std::set<std::string, lang::Expression> variables;
-    Scope* parent_scope;
-    std::string belongs_to;
+    std::string reason;
 
 public:
+    ReferenceException(std::string message);
+};
+
+class Scope {
+private:
+    Scope* parent_scope;
+    const std::string belongs_to;
+    std::map<std::string, Entity> variables;
+
+public:
+
     Scope(Scope* parent_scope, std::string owner);
 
-    bool add_entry(std::string name, T value);
+    /**
+     * Checks if `entry` already exists inside `this` object
+     */
+    bool has(std::string name) const;
+
+    /**
+     * Inserts a new entry
+     */
+    void add_entry(std::string name, Entity entry);
+
+    Entity get(std::string name);
 };
+
 } // internal
 } // lowscript
-
 
 #endif // SCOPE_H

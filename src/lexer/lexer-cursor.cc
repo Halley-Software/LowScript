@@ -13,6 +13,9 @@ LexerCursor::LexerCursor(std::string source):
 };
 
 const char& LexerCursor::next() {
+    if (is_eof())
+        return current_tok;
+
     return (current_tok = source.at(position++));
 }
 

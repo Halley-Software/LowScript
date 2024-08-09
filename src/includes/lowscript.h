@@ -1,5 +1,5 @@
-#ifndef LOWSCRIPT_HPP
-#define LOWSCRIPT_HPP
+#ifndef LOWSCRIPT_H
+#define LOWSCRIPT_H
 
 namespace lowscript {
 /**
@@ -8,4 +8,4 @@ namespace lowscript {
 void repl();
 } // lowscript
 
-#endif // LOWSCRIPT_HPP
+#endif // LOWSCRIPT_H

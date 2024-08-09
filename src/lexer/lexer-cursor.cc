@@ -12,10 +12,6 @@ LexerCursor::LexerCursor(std::string source):
     this->position = 0;
 };
 
-void LexerCursor::consume() {
-    position++;
-}
-
 const char& LexerCursor::next() {
     return (current_tok = source.at(position++));
 }

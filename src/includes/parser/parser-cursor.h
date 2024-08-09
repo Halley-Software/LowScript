@@ -24,7 +24,7 @@ public:
     /**
      * Returns true if the next char in the source is equal to `possibleChar`, false oterhwise
      */
-    bool check_next(struct Token posisible_next_token) const override;
+    bool check_next(const struct Token& posisible_next_token) const override;
 };
 
 #endif // PARSER_CURSOR_H

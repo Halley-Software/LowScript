@@ -6,13 +6,11 @@
 
 namespace lowscript {
 namespace internal {
-
+namespace scan {
 template<typename T>
 concept Lengthable = requires(T t) {
     { t.length() } -> std::convertible_to<std::size_t>;
 };
-
-namespace scan {
 
 template<Lengthable SRCT, typename T>
 class Cursor {

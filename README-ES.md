@@ -42,7 +42,6 @@ El concepto de paquetes llega hasta ahí. Podrás ver en el tutorial oficial que
 Ahora nos centraremos en los módulos, que son un poco más complejos.
 
 Cada módulo contiene código ejecutable, pero no puede contener cualquier tipo de código. Veámoslo:
-
 Cáda módulo distingue entre 2 tipos de _entidades_, entidades primarias y cualquier otro tipo de entidades.
 
 Las entidades primarias son:
@@ -62,3 +61,7 @@ Cada una de estas entidades, representa un tipo de valores y sirven para cosas d
 El otro tipo de entidades, las cuales no pueden ser declaradas en módulos, si no dentro de otras entidades, cuyo cuerpo pueda ser ejecutable. Son: variables cuyo valor puede cambiar (a diferencia de las constantes, cuyo valor es inmutable, con una pequeña excepción, que es explicada en nuestro tutorial oficial), estructuras de control, entre otras, que son especificadas en la página de documentación oficial.
 
 > Cuando nos referimos a entidades con un cuerpo ejecutable, nos referimos a entidades las cuales su contenido es capaz de devolver un valor una vez son analizadas por el intérprete o el compilador.
+
+También se ha implementado esta diferenciación para evitar las _variable globales_ en la medidad de lo posible. Pese a que este tipo de variables pueden llegar a ser muy cómodas de utilizar en proyectos pequeños, si el proyecto en el que se esta trabajando es demasiado grande, pueden llegar a ocasionar más problemas que comodidades. Esto debido a que pueden ser modificadas en cierta parte del código, hasta que llegando a cierto punto, pierdes el rastro de modificaciones que ha sufrido la variable. Ocasionando que pierdas valioso tiempo en intentar encontrar donde fue modificada.
+
+![LowScriptLogo](./LowScriptLogo.jpg)

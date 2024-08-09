@@ -65,4 +65,6 @@ The other type of entities, which cannot be declared in modules, but within othe
 
 > When we refer to entities with an executable body, we refer to entities whose content is capable of returning a value once they are analyzed by the interpreter or compiler.
 
+This differentiation has also been implemented to avoid _global variables_ as much as possible. Although these types of variables can be very convenient to use in small projects, if the project you are working on is too large, they can cause more problems than conveniences. This is because they can be modified in a certain part of the code, until reaching a certain point, you lose track of the modifications that the variable has suffered. Causing you to lose valuable time trying to find where it was modified.
+
 ![LowScriptLogo](./LowScriptLogo.jpg)

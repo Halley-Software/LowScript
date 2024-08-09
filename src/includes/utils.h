@@ -6,8 +6,14 @@
 
 #ifndef DEBUG
 #define dbg(str)
+
+#define curtt(str)
 #else
-#define dbg(str) std::cout << (str) << std::endl
+#include <iostream>
+#include <string>
+#define dbg(str) std::cout << str << std::endl
+
+#define curtt(str) std::cout << "Current tok -> " + std::string { str } << std::endl
 #endif // DEBUG
 
 #endif // UTILS_H

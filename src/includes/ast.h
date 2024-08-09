@@ -2,6 +2,7 @@
 #define AST_H
 
 #include <string>
+
 #include "parser/parser.h"
 
 namespace lowscript {
@@ -38,7 +39,7 @@ public:
  * Represents a character sequence, also called String xd
  */
 class StringNode : ASTNode {
-    private:
+private:
     std::string string;
 
 public:
@@ -70,10 +71,10 @@ public:
 
 class AST {
 private:
-    lowscript::internal::scan::Parser* p;
+    scan::Parser* p;
 
 public:
-    AST(lowscript::internal::scan::Parser* p);
+    AST(scan::Parser* p);
 
     void insert(ASTNode node);
 };

@@ -13,11 +13,9 @@ static std::string advance(Lexer* lex) {
 
 int main() {
     std::string source =
-    "fn main() { console.log(\"bruh\") }";
+    "fn main() { console.log('Hello, World!') }";
 
     Lexer lex = Lexer(source);
-
-    
 
     while (!lex.has_end()) {
         std::cout << advance(&lex) << std::endl;

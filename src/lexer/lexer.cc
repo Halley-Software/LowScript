@@ -5,16 +5,6 @@
 #include "token.h"
 #include "lexer/lexer.h"
 
-#include "utils.h"
-
-lowscript::internal::scan::Lexer::Lexer(std::string source):
-    cursor(new LexerCursor(source)),
-    current_tok(cursor->current_tok) {
-    this->line = 0;
-
-    cursor->next(); // advance to the first position in the source
-}
-
 static struct Token create_token(enum TokenType type, std::string content) {
     return {
         type,
@@ -32,14 +22,26 @@ static struct Token resolve_identifier(std::string identifier) {
     return create_token(TokenType::IdentifierName, identifier);
 }
 
-struct Token lowscript::internal::scan::Lexer::scan_operational_assign() {
+namespace lowscript {
+namespace internal {
+namespace scan {
+
+Lexer::Lexer(std::string source):
+    cursor(new LexerCursor(source)),
+    current_tok(cursor->current_tok) {
+    this->line = 0;
+
+    cursor->next(); // advance to the first position in the source
+}
+
+struct Token Lexer::scan_operational_assign() {
     if (cursor->check_next(Tokens::EQUAL))
         return create_token(TokenType::Operator, std::string {current_tok} + cursor->next());
 
     return create_token(TokenType::Operator, std::string {current_tok});
 }
 
-struct Token lowscript::internal::scan::Lexer::scan_adjust_operator() {
+struct Token  Lexer::scan_adjust_operator() {
     switch (current_tok) {
       case Tokens::PLUS:
       case Tokens::MINUS: {
@@ -51,18 +53,18 @@ struct Token lowscript::internal::scan::Lexer::scan_adjust_operator() {
     return scan_operational_assign();
 }
 
-struct Token lowscript::internal::scan::Lexer::init_operator_scan() {
+struct Token  Lexer::init_operator_scan() {
     if (current_tok == Tokens::MINUS && cursor->check_next(Tokens::GREATER))
       return create_token(TokenType::Token, std::string {current_tok} + cursor->next());
 
     return scan_adjust_operator();
 }
 
-bool lowscript::internal::scan::Lexer::has_end() {
+bool Lexer::has_end() {
     return cursor->is_eof();
 }
 
-const struct Token lowscript::internal::scan::Lexer::next_token() {
+const struct Token Lexer::next_token() {
     while (isspace(current_tok))
         cursor->next();
 
@@ -205,7 +207,7 @@ const struct Token lowscript::internal::scan::Lexer::next_token() {
     return create_token(TokenType::Unknown, std::string {current_tok});
 } // TODO: FIX RETURN VALUE
 
-void lowscript::internal::scan::Lexer::check_numeric_separators() {
+void Lexer::check_numeric_separators() {
     if (current_tok == UNDERSCORE) {
         if (cursor->check_next(UNDERSCORE)) {}
             //throw new LexingError(this, "Multiple consecutive numeric separators are not permitted")
@@ -221,3 +223,7 @@ void lowscript::internal::scan::Lexer::check_numeric_separators() {
         next_token();
     }
 }
+
+} // scan
+} // internal
+} // lowscript

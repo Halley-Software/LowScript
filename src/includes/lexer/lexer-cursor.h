@@ -4,13 +4,13 @@
 #include <string>
 
 #include "cursor.h"
-#include "utils.h"
 
 namespace lowscript {
 namespace internal {
 namespace scan {
 
-class LexerCursor : lowscript::internal::scan::Cursor<std::string, char> {
+class LexerCursor : scan::Cursor<std::string, char> {
+
 public:
     char& current_tok;
 

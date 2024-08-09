@@ -1,9 +1,10 @@
 #include <cctype>
 #include <string>
 
-#include "lexer/lexer-cursor.h"
 #include "token.h"
+#include "error_codes.h"
 #include "lexer/lexer.h"
+#include "lexer/lexer-cursor.h"
 
 static struct Token create_token(enum TokenType type, std::string content) {
     return {
@@ -53,7 +54,7 @@ struct Token  Lexer::scan_adjust_operator() {
     return scan_operational_assign();
 }
 
-struct Token  Lexer::init_operator_scan() {
+struct Token Lexer::init_operator_scan() {
     if (current_tok == Tokens::MINUS && cursor->check_next(Tokens::GREATER))
       return create_token(TokenType::Token, std::string {current_tok} + cursor->next());
 
@@ -96,10 +97,10 @@ const struct Token Lexer::next_token() {
             // If reachs a dot, means it is a float, but a dot can not appears in wherever
             if (current_tok == Tokens::DOT) {
                 if (isFloat) // if the current lexed number, was already marked as a float
-                    throw "Invalid float literal. Only a dot is permitted to separate the tens from the decimals.";
+                    throw std::string("Invalid float literal. Only a dot is permitted to separate the tens from the decimals.");
 
                 if (isBinary || isOctal || isHexadecimalVal)
-                    throw "Dots are only allowed for numeric floats.";
+                    throw std::string("Dots are only allowed for numeric floats.");
 
                 isFloat = true;
             }
@@ -126,7 +127,6 @@ const struct Token Lexer::next_token() {
             auto tok = create_token(TokenType::Token, std::string {current_tok});
 
             cursor->next(); // advance and prepare for next call, so the nex token will net be `tok`
-            dbg(current_tok);
 
             return tok;
         } break;
@@ -147,12 +147,18 @@ const struct Token Lexer::next_token() {
         } break;
 
         case Tokens::QUOTE: {
-            identifier = cursor->next();
+            identifier = current_tok;
 
-            if (!cursor->check_next(Tokens::QUOTE)) {
+            if (!cursor->check_next(Tokens::QUOTE))
                 while (cursor->next() != Tokens::QUOTE)
                     identifier += current_tok;
-            }
+
+            if (current_tok != Tokens::QUOTE)
+                throw errors::Errors::BAD_CHAR_END;
+
+            identifier += current_tok;
+            cursor->next();
+
             return create_token(TokenType::CharLiteral, identifier);
         } break;
 
@@ -168,12 +174,17 @@ const struct Token Lexer::next_token() {
         } break;
 
         case Tokens::DQUOTE: {
-            if (!cursor->check_next(Tokens::DQUOTE)) {
-                identifier = cursor->next();
+            identifier = current_tok;
 
+            if (!cursor->check_next(Tokens::DQUOTE))
                 while (cursor->next() != Tokens::DQUOTE)
                     identifier += current_tok;
-            }
+
+            if (current_tok != Tokens::DQUOTE)
+                throw errors::Errors::BAD_STRING_END;
+
+            identifier += current_tok;
+            cursor->next();
             
             return create_token(TokenType::StringLiteral, identifier);
 
@@ -197,7 +208,6 @@ const struct Token Lexer::next_token() {
 
                 return create_token(TokenType::Token, "..");
             }
-            
             
             cursor->next();
             return create_token(TokenType::Token, std::string {Tokens::DOT});

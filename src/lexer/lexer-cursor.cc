@@ -28,7 +28,7 @@ bool LexerCursor::is_eof() const {
     return current_tok == source.back();
 }
 
-bool internal::scan::LexerCursor::check_next(char posisible_next_token) const {
+bool LexerCursor::check_next(const char& posisible_next_token) const {
     return source[position + 1] == posisible_next_token;
 }
 

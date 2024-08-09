@@ -36,7 +36,7 @@ public:
      * 
      * This method deoes not advance the cursor to the next position
      */
-    bool check_next(char posisible_next_token) const override;
+    bool check_next(const char& posisible_next_token) const override;
 };
 
 } // scan

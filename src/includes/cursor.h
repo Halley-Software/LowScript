@@ -39,7 +39,7 @@ public:
     /**
      * Returns true if the next char in the source is equal to `possibleChar`, false oterhwise
      */
-    virtual bool check_next(T posisible_next_token) const = 0;
+    virtual bool check_next(const T& posisible_next_token) const = 0;
 };
 } // scan
 } // internal

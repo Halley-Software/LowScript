@@ -47,6 +47,8 @@ Each module contains executable code, but it cannot contain any type of code. Le
 
 Each module distinguishes between 2 types of _entities_, primary entities and any other type of entities.
 
+> Some entities may belong to both groups.
+
 Primary entities are:
 
 - `modules`
@@ -59,7 +61,14 @@ Primary entities are:
 
 > When modules are mentioned, we mean that a module can contain others, using the keyword `module` followed by a name.
 
-Each of these entities represents a type of value and serves different purposes. In addition, each of them can only be declared within other primary entities. Except for functions, which can be declared within other functions or assigned to variables or constants. This feature is known as **first-level citizens**
+Each of these entities represents a type or set of values ​​and serves different purposes. In addition, some of them can declare entities of the same type or of other types within themselves.
+For example:
+
+- Classes can declare constants and functions within them, but not other classes.
+
+- Functions can have other functions declared within them.
+
+- Modules can declare other modules within them, as well as any other type of primary entity.
 
 The other type of entities, which cannot be declared in modules, but within other entities, whose body can be executable. These are: variables whose value can change (unlike constants, whose value is immutable, with a small exception, which is explained in our official tutorial), control structures, among others, which are specified in the official documentation page.
 

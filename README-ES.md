@@ -44,6 +44,8 @@ Ahora nos centraremos en los módulos, que son un poco más complejos.
 Cada módulo contiene código ejecutable, pero no puede contener cualquier tipo de código. Veámoslo:
 Cáda módulo distingue entre 2 tipos de _entidades_, entidades primarias y cualquier otro tipo de entidades.
 
+> Algunas entidades pueden pertenecer a ambos grupos.
+
 Las entidades primarias son:
 
 - `módulos`
@@ -56,7 +58,14 @@ Las entidades primarias son:
 
 > Cuando se mencionan módulos es que nos referimos a que un módulo puede contener otros, usando la palabara clave `module` seguido de un nombre.
 
-Cada una de estas entidades, representa un tipo de valores y sirven para cosas distintas. Además cada una de ellas solo puede ser declarada dentro de otras entidades primarias. A excepción de las funciones, las cuales pueden ser declaradas dentro de otras funciones o ser asignadas a variables o constantes. A esta característica se le conoce como **ciudadanos de primer nivel**
+Cada una de estas entidades, representa un tipo o conjunto de valores y sirven para cosas distintas. Además algunas de ellas se pueden declarar dentro de si mismas, entidades de su mismo tipo o de otros tipos.
+Por ejemplo:
+
+- Las clases pueden declarar en su interior constantes y funciones, pero no otras clases.
+
+- Las funciones pueden tener declaradas en su interior otras funciones.
+
+- Los módulos pueden declarar otros módulos en su interior, ademas de cualquier otro tipo de entidad primaria
 
 El otro tipo de entidades, las cuales no pueden ser declaradas en módulos, si no dentro de otras entidades, cuyo cuerpo pueda ser ejecutable. Son: variables cuyo valor puede cambiar (a diferencia de las constantes, cuyo valor es inmutable, con una pequeña excepción, que es explicada en nuestro tutorial oficial), estructuras de control, entre otras, que son especificadas en la página de documentación oficial.
 

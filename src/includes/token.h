@@ -7,7 +7,7 @@
 /**
  * Represents a single token which has a special meaning else than a token that made up an identifier or number
  */
-enum Tokens {
+enum class Tokens {
   LPAREN        = '(',
   RPAREN        = ')',
   LBRACE        = '{',
@@ -36,7 +36,7 @@ enum Tokens {
   UNDERSCORE    = '_',
 };
 
-enum Keywords {
+enum class Keywords {
   FN,
   VAR,
   CONST,
@@ -94,7 +94,7 @@ enum Keywords {
  *
  * For example, an `IdentifierName` is used to recognize a variable / function reference
  */
-enum TokenType {
+enum class TokenType {
   // generic tokens
   Unknown        = -1,
   IdentifierName = 0,

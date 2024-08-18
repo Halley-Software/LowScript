@@ -1,6 +1,6 @@
-#include "lang/entities.h"
 #include "lang/commons.h"
 #include "lang/expressions.h"
+#include "lang/entities/entities.h"
 
 namespace lowscript {
 namespace lang {

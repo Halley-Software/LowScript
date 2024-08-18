@@ -3,9 +3,9 @@
 
 #include <string>
 
+#include "lang/scope.h"
 #include "lang/commons.h"
 #include "lang/expressions.h"
-#include "lang/scope.h"
 
 namespace lowscript {
 namespace lang {

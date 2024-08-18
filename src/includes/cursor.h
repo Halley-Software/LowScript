@@ -16,11 +16,12 @@ template<Lengthable SRCT, typename T>
 class Cursor {
 protected:
     SRCT source;
-    T current_tok;
     size_t source_len;
     size_t position;
 
 public:
+    T current_tok;
+
     /**
      * Returns the next char in the source
      */

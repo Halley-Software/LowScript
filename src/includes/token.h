@@ -101,7 +101,7 @@ enum TokenType {
   Statement      = 1,
   Keyword        = 2,
   Operator       = 3,
-  Token          = 4,
+  Tok            = 4,
 
   // tokens that belongs to an primitive representation of a value
   NumericLiteral = 5,

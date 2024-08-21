@@ -46,13 +46,16 @@ public:
      * Returns a pointer to the nameable entity which as `name`
      */
     const Nameable* get(std::string name) const;
+};
 
-    /**
-     * Inserts a new entry
-     */
-    void add_entry(std::string name, Entity entry);
+class ReferenceException : public std::exception {
+private:
+    const char* reason;
 
-    Entity get(std::string name);
+public:
+    explicit ReferenceException(const char* message);
+
+    const char* what() const noexcept override;
 };
 
 } // internal

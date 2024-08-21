@@ -1,37 +1,51 @@
 #ifndef SCOPE_H
 #define SCOPE_H
 
-#include <exception>
 #include <map>
+#include <memory>
 #include <string>
-
-#include "commons.h"
+#include <exception>
 
 namespace lowscript {
 namespace lang {
 
-class ReferenceException : public std::exception {
-private:
-    std::string reason;
+/**
+ * To avoid the issue of recursive inclusion when using the #include directive,
+ * we will forward declare the `Entity` class,
+ * thus avoiding the need to include the file that declares it.
+ */
+class Entity;
 
-public:
-    ReferenceException(std::string message);
-};
+// Entity contains `name` as instance var
+// so it can be consider a _Nameable_
+using Nameable = Entity;
 
 class Scope {
 private:
-    Scope* parent_scope;
+    std::unique_ptr<Scope> parent_scope;
     const std::string belongs_to;
-    std::map<std::string, Entity> variables;
+    std::map<std::string, Nameable> variables;
+
+    const Nameable* search(std::string name) const;
 
 public:
 
-    Scope(Scope* parent_scope, std::string owner);
+    Scope(std::unique_ptr<Scope> parent_scope, std::string owner);
+
+    /**
+     * Inserts a new entry
+     */
+    void add_entry(std::string name, Nameable entry);
 
     /**
      * Checks if `entry` already exists inside `this` object
      */
     bool has(std::string name) const;
+
+    /**
+     * Returns a pointer to the nameable entity which as `name`
+     */
+    const Nameable* get(std::string name) const;
 
     /**
      * Inserts a new entry
